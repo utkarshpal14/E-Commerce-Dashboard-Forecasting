@@ -125,7 +125,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <p className="text-gray-600">utkarshpal265@gmail.com</p>
+                    <p className="text-gray-600">utkarsh8588.beaift24@chitkara.edu.in</p>
                     <p className="text-gray-600">info@ecommerceanalytics.com</p>
                   </div>
                 </div>
@@ -138,7 +138,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Phone</h3>
-                    <p className="text-gray-600">+91 8467845801</p>
+                    <p className="text-gray-600">+91 XXXXXXX</p>
                     <p className="text-gray-600">Mon-Fri 9am-6pm EST</p>
                   </div>
                 </div>
@@ -166,7 +166,7 @@ export default function Contact() {
               <div className="flex gap-4">
                 {/* Instagram */}
                 <a
-                  href="#"
+                  href="https://www.instagram.com/utkarshpal14"
                   className="w-10 h-10 rounded-lg flex items-center justify-center text-white bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-400 hover:from-pink-600 hover:via-red-600 hover:to-yellow-500 transition-colors"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
