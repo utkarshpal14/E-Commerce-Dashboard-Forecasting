@@ -1,9 +1,9 @@
 # Large data files
 data/processed/Amazon_Sales_Cleaned_augmented.csv
 data/processed/Amazon_Sales_Cleaned_augmented_5y.csv
-data/processed/Amazon_Sales_Cleaned.csv
-data/processed/sales.db
-data/raw/Amazon Sale Report.csv
+# data/processed/Amazon_Sales_Cleaned.csv
+# data/processed/sales.db
+# data/raw/Amazon Sale Report.csv
 
 # Environment files
 ui-web/.env
