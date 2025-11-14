@@ -1,0 +1,10 @@
+cd api
+.\.venv\Scripts\Activate.ps1
+pip install fastapi "uvicorn[standard]" pandas numpy
+python -m uvicorn main:app --reload
+python -m uvicorn main:app --reload
+
+
+
+
+its a copy file.

@@ -1,0 +1,3 @@
+Per-order Welch t-test: t=nan, p=nan, Cohen's d=nan
+Monthly Welch t-test: t=nan, p=nan
+ANOVA p-value (categories): nan

@@ -1,0 +1,33 @@
+{
+  "per_order": {
+    "festive_count": 0,
+    "nonfestive_count": 116041,
+    "festive_mean": NaN,
+    "nonfestive_mean": 649.769228117648,
+    "t_stat": NaN,
+    "p_value": NaN,
+    "cohens_d": NaN
+  },
+  "monthly": {
+    "festive_months_count": 0,
+    "nonfestive_months_count": 4,
+    "festive_month_mean": NaN,
+    "nonfestive_month_mean": 18849967.75,
+    "t_stat": NaN,
+    "p_value": NaN
+  },
+  "anova": {
+    "categories_considered": [
+      "Set",
+      "Kurta",
+      "Western Dress",
+      "Top",
+      "Ethnic Dress",
+      "Blouse",
+      "Bottom",
+      "Saree"
+    ],
+    "anova_p_value": NaN,
+    "levene_p_value": NaN
+  }
+}
