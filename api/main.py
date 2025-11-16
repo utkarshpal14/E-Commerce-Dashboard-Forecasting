@@ -19,7 +19,12 @@ app = FastAPI(title="E-Commerce Analytics API", version="0.1.0")
 # CORS for local dev (adjust allowed origins for prod)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", "https://e-commerce-dashboard-forecasting.vercel.app/","https://e-commerce-dashboard-forecasting.vercel.app"],
+    allow_origins=[
+        "http://localhost:5173", 
+        "http://127.0.0.1:5173", 
+        "https://e-commerce-dashboard-forecasting-fpaq8xqr0.vercel.app",
+        "https://e-commerce-dashboard-forecasting.onrender.com"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
