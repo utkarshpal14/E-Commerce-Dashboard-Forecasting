@@ -54,7 +54,16 @@ export default function Contact() {
     e.preventDefault();
     setError(null);
     try {
-      const res = await fetch("http://127.0.0.1:8000/contact", {
+      // const res = await fetch("http://127.0.0.1:8000/contact", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({
+      //     name: formData.name,
+      //     email: formData.email,
+      //     subject: formData.subject,
+      //     message: formData.message,
+      //   }),
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -63,7 +72,7 @@ export default function Contact() {
           subject: formData.subject,
           message: formData.message,
         }),
-      });
+      });      
       if (!res.ok) {
         const data = await res.json().catch(() => ({ detail: "Failed to send" }));
         throw new Error(data?.detail || `Request failed (${res.status})`);
