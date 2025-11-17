@@ -1,6 +1,6 @@
 from functools import lru_cache
 from typing import List, Optional
-from fastapi import FastAPI, Query, HTTPException
+from fastapi import FastAPI, Query, HTTPException, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
 import pandas as pd
@@ -14,7 +14,11 @@ from pathlib import Path
 # Load .env deterministically from this api folder
 load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
 
+# Create main FastAPI app
 app = FastAPI(title="E-Commerce Analytics API", version="0.1.0")
+
+# Create API router
+api_router = APIRouter(prefix="/api")
 
 # CORS for local dev (adjust allowed origins for prod)
 app.add_middleware(
@@ -30,6 +34,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mount the API router
+app.include_router(api_router)
 
 DATA_PATH = os.getenv("DATA_PATH", "../data/processed/Amazon_Sales_Cleaned.csv")
 
@@ -70,12 +77,12 @@ def apply_filters(df: pd.DataFrame,
     return out.copy()
 
 
-@app.get("/health")
+@api_router.get("/health")
 def health():
     return {"status": "ok"}
 
 
-@app.get("/filters")
+@api_router.get("/filters")
 def get_filters():
     df = load_data_cached()
     categories = sorted(df['Category'].dropna().astype(str).unique().tolist())
@@ -104,7 +111,7 @@ def get_filters():
     }
 
 
-@app.get("/kpis")
+@api_router.get("/kpis")
 def kpis(
     categories: Optional[List[str]] = Query(default=None),
     cities: Optional[List[str]] = Query(default=None),
@@ -136,7 +143,7 @@ def kpis(
     }
 
 
-@app.get("/timeseries")
+@api_router.get("/timeseries")
 def timeseries(
     granularity: str = "month",
     categories: Optional[List[str]] = Query(default=None),
@@ -156,7 +163,7 @@ def timeseries(
     return {"points": ts.rename(columns={'MonthStart':'date','Total_Amount':'value'}).to_dict(orient='records')}
 
 
-@app.get("/categories")
+@app.get("/api/categories")
 def by_category(
     categories: Optional[List[str]] = Query(default=None),
     cities: Optional[List[str]] = Query(default=None),
@@ -171,7 +178,7 @@ def by_category(
     return {"items": agg.rename(columns={'Total_Amount':'value'}).to_dict(orient='records')}
 
 
-@app.get("/regions")
+@app.get("/api/regions")
 def by_region(
     level: str = "state",
     categories: Optional[List[str]] = Query(default=None),
@@ -188,7 +195,7 @@ def by_region(
     return {"items": agg.rename(columns={col:'name','Total_Amount':'value'}).to_dict(orient='records')}
 
 
-@app.get("/forecast")
+@api_router.get("/forecast")
 def forecast(
     h: int = 3,
     model: str = "linear",
@@ -244,7 +251,7 @@ def _build_email(payload: Contact) -> EmailMessage:
     return msg
 
 
-@app.post("/contact")
+@api_router.post("/contact")
 async def send_contact(payload: Contact):
     try:
         msg = _build_email(payload)
