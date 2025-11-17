@@ -10,18 +10,27 @@
 
 <div align="center">
   <!-- Main Dashboard -->
-  <img src="screenshots/dashboard-main.png" alt="Main Dashboard View" width="80%">
-  
+  <!-- <img src="screenshots/dashboard-main.png" alt="Main Dashboard View" width="80%">
+   -->
+<img width=80%  alt="Screenshot 2025-11-14 015633" src="https://github.com/user-attachments/assets/44afc7cd-20f3-416a-a6f7-b8e60e574f25" />
+<img width=80%  alt="Screenshot 2025-11-14 015953" src="https://github.com/user-attachments/assets/1d60f549-a988-4947-ade0-465a733ce4e7" />
+</div>
+
+## 📊 Sales Analysis 
+<div align="center">
   <!-- Sales Analytics -->
   <div style="display: flex; justify-content: space-between; margin: 10px 0;">
-    <img src="screenshots/sales-metrics.png" alt="Sales Metrics" width="48%">
-    <img src="screenshots/category-analysis.png" alt="Category Analysis" width="48%">
+    <!-- <img src="screenshots/sales-metrics.png" alt="Sales Metrics" width="48%"> -->
+    <img width=70% alt="Screenshot 2025-11-14 020023" src="https://github.com/user-attachments/assets/9f754786-39c1-4328-9d6e-ea046f5b5c6e" />
+    
+   
   </div>
   
   <!-- Regional Analysis -->
   <div style="display: flex; justify-content: space-between; margin: 10px 0;">
-    <img src="screenshots/regional-sales.png" alt="Regional Sales" width="48%">
-    <img src="screenshots/forecasting.png" alt="Sales Forecasting" width="48%">
+    <!-- <img width=48% src="screenshots/regional-sales.png"  width="48%"> -->
+    <img width=70% alt="Screenshot 2025-11-14 020051" src="https://github.com/user-attachments/assets/325b726a-c226-4ddd-9b95-85e53695f058" />
+
   </div>
 </div>
 
@@ -29,8 +38,10 @@
 
 <div align="center">
   <!-- Login Page -->
-  <img src="screenshots/login-page.png" alt="Login Page" width="50%" style="border: 1px solid #e1e4e8; border-radius: 8px;">
-  
+  <!-- <img src="screenshots/login-page.png" alt="Login Page" width="50%" style="border: 1px solid #e1e4e8; border-radius: 8px;"> -->
+  <img  alt="Screenshot 2025-11-14 015823" src="https://github.com/user-attachments/assets/dfecb655-596b-4340-b4c8-c2aa7a781930" style="border: 1px solid #e1e4e8; border-radius: 8px;/>
+
+
   <p><em>Secure login page with email and password authentication</em></p>
 </div>
 
