@@ -16,12 +16,13 @@ load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
 
 app = FastAPI(title="E-Commerce Analytics API", version="0.1.0")
 
-# CORS for local dev (adjust allowed origins for prod)
+# CORS configuration for all environments
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173", 
-        "http://127.0.0.1:5173", 
+        "http://127.0.0.1:5173",
+        "https://e-commerce-dashboard-forecasting.vercel.app",
         "https://e-commerce-dashboard-forecasting-fpaq8xqr0.vercel.app",
         "https://e-commerce-dashboard-forecasting.onrender.com"
     ],
