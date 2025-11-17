@@ -21,7 +21,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173", 
-        "http://127.0.0.1:5173", 
+        "http://127.0.0.1:5173",
+        "https://e-commerce-dashboard-forecasting.vercel.app",
         "https://e-commerce-dashboard-forecasting-fpaq8xqr0.vercel.app",
         "https://e-commerce-dashboard-forecasting.onrender.com"
     ],
@@ -251,16 +252,31 @@ async def send_contact(payload: Contact):
         port = int(os.getenv("SMTP_PORT", "587"))
         username = os.getenv("SMTP_USER")
         password = os.getenv("SMTP_PASS")
+        
         if not (username and password):
-            raise RuntimeError("SMTP_USER/SMTP_PASS not configured")
-        await aiosmtplib.send(
-            msg,
-            hostname=host,
-            port=port,
-            start_tls=True,
-            username=username,
-            password=password,
-        )
-        return {"ok": True}
+            return {"ok": False, "error": "Email not configured on server"}
+
+        # Create a custom timeout (25 seconds - Vercel's max is 30s for Pro)
+        timeout = aiosmtplib.SMTP(timeout=25)
+        
+        # Connect with explicit timeout
+        await timeout.connect(hostname=host, port=port)
+        if port == 587:
+            await timeout.starttls()
+        
+        # Authenticate
+        if username and password:
+            await timeout.login(username, password)
+        
+        # Send the message
+        await timeout.send_message(msg)
+        await timeout.quit()
+        
+        return {"ok": True, "message": "Email sent successfully"}
+        
+    except asyncio.TimeoutError:
+        return {"ok": False, "error": "Email server connection timed out (25s)"}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        error_msg = str(e).replace(password, '***') if password else str(e)
+        print(f"Email error: {error_msg}")
+        return {"ok": False, "error": f"Failed to send email: {error_msg}"}
