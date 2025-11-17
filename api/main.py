@@ -16,23 +16,25 @@ load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
 
 app = FastAPI(title="E-Commerce Analytics API", version="0.1.0")
 
-# CORS configuration - temporarily permissive for debugging
+# CORS configuration: explicitly allow known frontend origins
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://e-commerce-dashboard-forecasting.vercel.app",
+    "https://e-commerce-dashboard-forecasting-fpaq8xqr0.vercel.app",
+    "https://e-commerce-dashboard-forecasting.onrender.com",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for now
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Log CORS configuration for debugging
-print("CORS Configuration:")
-print(f"Allowed Origins: *")
-print(f"Allow Credentials: {True}")
-print(f"Allowed Methods: *")
-print(f"Allowed Headers: *")
-
 DATA_PATH = os.getenv("DATA_PATH", "../data/processed/Amazon_Sales_Cleaned.csv")
+
 
 @lru_cache(maxsize=1)
 def load_data_cached() -> pd.DataFrame:
