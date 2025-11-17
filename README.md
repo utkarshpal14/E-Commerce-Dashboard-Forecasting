@@ -4,24 +4,51 @@
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![React](https://img.shields.io/badge/React-18.0+-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
 
+## 📋 Overview
+
+E-Commerce Dashboard & Forecasting is a comprehensive analytics platform designed to help businesses track sales performance, analyze customer behavior, and predict future trends. This full-stack application combines the power of React for the frontend and FastAPI for the backend, providing real-time insights through interactive visualizations.
+
+### Key Features
+
+- **Real-time Analytics**: Monitor sales performance with up-to-the-minute data
+- **Interactive Visualizations**: Explore data through intuitive charts and graphs
+- **Sales Forecasting**: Leverage predictive analytics to anticipate market trends
+- **Multi-dimensional Analysis**: Slice data by categories, regions, and time periods
+- **Responsive Design**: Access your dashboard from any device
+- **Secure Authentication**: Protected user accounts with role-based access
+- **Data Export**: Download reports in multiple formats for further analysis
+
+Built with modern web technologies, this dashboard helps businesses make data-driven decisions by transforming raw sales data into actionable insights.
+
+
+
 
 
 ## 📊 Dashboard Preview
 
 <div align="center">
   <!-- Main Dashboard -->
-  <img src="screenshots/dashboard-main.png" alt="Main Dashboard View" width="80%">
-  
+  <!-- <img src="screenshots/dashboard-main.png" alt="Main Dashboard View" width="80%">
+   -->
+<img width=80%  alt="Screenshot 2025-11-14 015633" src="https://github.com/user-attachments/assets/44afc7cd-20f3-416a-a6f7-b8e60e574f25" />
+<img width=80%  alt="Screenshot 2025-11-14 015953" src="https://github.com/user-attachments/assets/1d60f549-a988-4947-ade0-465a733ce4e7" />
+</div>
+
+## 📊 Sales Analysis 
+<div align="center">
   <!-- Sales Analytics -->
   <div style="display: flex; justify-content: space-between; margin: 10px 0;">
-    <img src="screenshots/sales-metrics.png" alt="Sales Metrics" width="48%">
-    <img src="screenshots/category-analysis.png" alt="Category Analysis" width="48%">
+    <!-- <img src="screenshots/sales-metrics.png" alt="Sales Metrics" width="48%"> -->
+    <img width=70% alt="Screenshot 2025-11-14 020023" src="https://github.com/user-attachments/assets/9f754786-39c1-4328-9d6e-ea046f5b5c6e" />
+    
+   
   </div>
   
   <!-- Regional Analysis -->
   <div style="display: flex; justify-content: space-between; margin: 10px 0;">
-    <img src="screenshots/regional-sales.png" alt="Regional Sales" width="48%">
-    <img src="screenshots/forecasting.png" alt="Sales Forecasting" width="48%">
+    <!-- <img width=48% src="screenshots/regional-sales.png"  width="48%"> -->
+    <img width=70% alt="Screenshot 2025-11-14 020051" src="https://github.com/user-attachments/assets/325b726a-c226-4ddd-9b95-85e53695f058" />
+
   </div>
 </div>
 
@@ -29,8 +56,10 @@
 
 <div align="center">
   <!-- Login Page -->
-  <img src="screenshots/login-page.png" alt="Login Page" width="50%" style="border: 1px solid #e1e4e8; border-radius: 8px;">
-  
+  <!-- <img src="screenshots/login-page.png" alt="Login Page" width="50%" style="border: 1px solid #e1e4e8; border-radius: 8px;"> -->
+  <img  alt="Screenshot 2025-11-14 015823" src="https://github.com/user-attachments/assets/dfecb655-596b-4340-b4c8-c2aa7a781930" style="border: 1px solid #e1e4e8; border-radius: 8px;/>
+
+
   <p><em>Secure login page with email and password authentication</em></p>
 </div>
 
