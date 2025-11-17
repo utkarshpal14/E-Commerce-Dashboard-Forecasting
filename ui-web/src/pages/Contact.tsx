@@ -135,7 +135,7 @@ export default function Contact() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
                     <p className="text-gray-600">utkarsh8588.beaift24@chitkara.edu.in</p>
-                    <p className="text-gray-600">info@ecommerceanalytics.com</p>
+                    <p className="text-gray-600">mitali8602.beaift24@chitkara.edu.in</p>
                   </div>
                 </div>
 
