@@ -25,6 +25,15 @@
   </div>
 </div>
 
+## 🔐 Login Page
+
+<div align="center">
+  <!-- Login Page -->
+  <img src="screenshots/login-page.png" alt="Login Page" width="50%" style="border: 1px solid #e1e4e8; border-radius: 8px;">
+  
+  <p><em>Secure login page with email and password authentication</em></p>
+</div>
+
 ## 🚀 Features
 
 - **Interactive Dashboard**: Real-time visualization of sales metrics and trends
