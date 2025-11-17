@@ -4,6 +4,24 @@
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![React](https://img.shields.io/badge/React-18.0+-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
 
+## 📋 Overview
+
+E-Commerce Dashboard & Forecasting is a comprehensive analytics platform designed to help businesses track sales performance, analyze customer behavior, and predict future trends. This full-stack application combines the power of React for the frontend and FastAPI for the backend, providing real-time insights through interactive visualizations.
+
+### Key Features
+
+- **Real-time Analytics**: Monitor sales performance with up-to-the-minute data
+- **Interactive Visualizations**: Explore data through intuitive charts and graphs
+- **Sales Forecasting**: Leverage predictive analytics to anticipate market trends
+- **Multi-dimensional Analysis**: Slice data by categories, regions, and time periods
+- **Responsive Design**: Access your dashboard from any device
+- **Secure Authentication**: Protected user accounts with role-based access
+- **Data Export**: Download reports in multiple formats for further analysis
+
+Built with modern web technologies, this dashboard helps businesses make data-driven decisions by transforming raw sales data into actionable insights.
+
+
+
 
 
 ## 📊 Dashboard Preview
