@@ -1,5 +1,50 @@
 # E-Commerce Dashboard & Forecasting
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![React](https://img.shields.io/badge/React-18.0+-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
+
+
+
+## 📊 Dashboard Preview
+
+<div align="center">
+  <!-- Main Dashboard -->
+  <img src="screenshots/dashboard-main.png" alt="Main Dashboard View" width="80%">
+  
+  <!-- Sales Analytics -->
+  <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+    <img src="screenshots/sales-metrics.png" alt="Sales Metrics" width="48%">
+    <img src="screenshots/category-analysis.png" alt="Category Analysis" width="48%">
+  </div>
+  
+  <!-- Regional Analysis -->
+  <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+    <img src="screenshots/regional-sales.png" alt="Regional Sales" width="48%">
+    <img src="screenshots/forecasting.png" alt="Sales Forecasting" width="48%">
+  </div>
+</div>
+
+## 🚀 Features
+
+- **Interactive Dashboard**: Real-time visualization of sales metrics and trends
+- **Sales Forecasting**: Predictive analytics for future sales trends
+- **Data Filtering**: Filter by category, region, and time period
+- **Responsive Design**: Works on all devices
+- **Contact Form**: Built-in contact functionality
+
+## Project Structure
+
+- `data/raw/Amazon Sale Report.csv` – Original raw dataset
+- `data/processed/Amazon_Sales_Cleaned.csv` – Cleaned dataset used by API & notebooks
+- `data/processed/sales.db` – SQLite DB used for SQL queries
+- [api/](cci:7://file:///c:/Users/Utkarsh%20Pal/OneDrive/%E6%96%87%E6%A1%A3/E-Commerce%20-%20Copy/api:0:0-0:0) – FastAPI backend
+- [ui-web/](cci:7://file:///c:/Users/Utkarsh%20Pal/OneDrive/%E6%96%87%E6%A1%A3/E-Commerce%20-%20Copy/ui-web:0:0-0:0) – React + TypeScript + Vite dashboard
+- [notebooks/](cci:7://file:///c:/Users/Utkarsh%20Pal/OneDrive/%E6%96%87%E6%A1%A3/E-Commerce%20-%20Copy/notebooks:0:0-0:0) – Data cleaning, EDA, and forecasting notebooks
+- [scripts/](cci:7://file:///c:/Users/Utkarsh%20Pal/OneDrive/%E6%96%87%E6%A1%A3/E-Commerce%20-%20Copy/scripts:0:0-0:0) – Python utility scripts
+
+
+
 End-to-end analytics project built on an Amazon-style e-commerce dataset. It covers:
 
 - **Data cleaning & feature engineering** (Python scripts + Jupyter notebooks)
