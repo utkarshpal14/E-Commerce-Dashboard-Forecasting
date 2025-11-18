@@ -6,10 +6,13 @@ from pydantic import BaseModel, EmailStr
 import pandas as pd
 import numpy as np
 import os
+import asyncio
 import aiosmtplib
 from email.message import EmailMessage
 from dotenv import load_dotenv
 from pathlib import Path
+
+
 
 # Load .env deterministically from this api folder
 load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
@@ -34,9 +37,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Mount the API router
-app.include_router(api_router)
 
 DATA_PATH = os.getenv("DATA_PATH", "../data/processed/Amazon_Sales_Cleaned.csv")
 
@@ -163,7 +163,7 @@ def timeseries(
     return {"points": ts.rename(columns={'MonthStart':'date','Total_Amount':'value'}).to_dict(orient='records')}
 
 
-@app.get("/api/categories")
+@api_router.get("/categories")
 def by_category(
     categories: Optional[List[str]] = Query(default=None),
     cities: Optional[List[str]] = Query(default=None),
@@ -178,7 +178,7 @@ def by_category(
     return {"items": agg.rename(columns={'Total_Amount':'value'}).to_dict(orient='records')}
 
 
-@app.get("/api/regions")
+@api_router.get("/regions")
 def by_region(
     level: str = "state",
     categories: Optional[List[str]] = Query(default=None),
@@ -224,7 +224,7 @@ def forecast(
     return {"history": history, "forecast": forecast_points}
 
 
-# ---------------------- Contact Endpoint (Email) ----------------------
+#  ---------------------- Contact Endpoint (Email) ----------------------
 class Contact(BaseModel):
     name: str
     email: EmailStr
@@ -251,7 +251,7 @@ def _build_email(payload: Contact) -> EmailMessage:
     return msg
 
 
-@api_router.post("/contact")
+@api_router.post("/contact", response_model=dict)
 async def send_contact(payload: Contact):
     try:
         msg = _build_email(payload)
@@ -259,31 +259,35 @@ async def send_contact(payload: Contact):
         port = int(os.getenv("SMTP_PORT", "587"))
         username = os.getenv("SMTP_USER")
         password = os.getenv("SMTP_PASS")
-        
-        if not (username and password):
-            return {"ok": False, "error": "Email not configured on server"}
 
-        # Create a custom timeout (25 seconds - Vercel's max is 30s for Pro)
-        timeout = aiosmtplib.SMTP(timeout=25)
-        
-        # Connect with explicit timeout
-        await timeout.connect(hostname=host, port=port)
-        if port == 587:
-            await timeout.starttls()
-        
-        # Authenticate
-        if username and password:
-            await timeout.login(username, password)
-        
-        # Send the message
-        await timeout.send_message(msg)
-        await timeout.quit()
-        
+        if not (username and password):
+            raise HTTPException(
+                status_code=500,
+                detail="SMTP credentials not configured"
+            )
+
+        await aiosmtplib.send(
+            msg,
+            hostname=host,
+            port=port,
+            start_tls=port == 587,  # Use STARTTLS for port 587
+            use_tls=port == 465,    # Use TLS for port 465
+            username=username,
+            password=password,
+            timeout=30
+        )
         return {"ok": True, "message": "Email sent successfully"}
-        
-    except asyncio.TimeoutError:
-        return {"ok": False, "error": "Email server connection timed out (25s)"}
+
     except Exception as e:
-        error_msg = str(e).replace(password, '***') if password else str(e)
-        print(f"Email error: {error_msg}")
-        return {"ok": False, "error": f"Failed to send email: {error_msg}"}
+        error_msg = str(e)
+        if password:
+            error_msg = error_msg.replace(password, '***')
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to send email: {error_msg}"
+        )
+
+# Mount the API router AFTER all route definitions
+app.include_router(api_router)
+
+
