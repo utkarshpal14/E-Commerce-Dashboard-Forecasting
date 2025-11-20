@@ -1,10 +1,21 @@
-cd api
-.\.venv\Scripts\Activate.ps1
-pip install fastapi "uvicorn[standard]" pandas numpy
-python -m uvicorn main:app --reload
-python -m uvicorn main:app --reload
+/*instructions for run frontend*/
+
+1.cd frontend
+2.npm install
+3.npm run dev
 
 
 
+/*instructions for run backend*/
 
-its a copy file.
+1.cd api
+2.pip install -r requirements.txt
+3.python -m uvicorn main:app --reload
+
+
+
+Alternative:-
+1. cd api
+2. .\.venv\Scripts\Activate.ps1
+3. pip install fastapi "uvicorn[standard]" pandas numpy
+4. python -m uvicorn main:app --reload

@@ -2,6 +2,7 @@ from functools import lru_cache
 from typing import List, Optional
 from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr
 import pandas as pd
 import numpy as np
@@ -14,7 +15,35 @@ from pathlib import Path
 # Load .env deterministically from this api folder
 load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
 
-app = FastAPI(title="E-Commerce Analytics API", version="0.1.0")
+app = FastAPI(title="E-Commerce Analytics API", version="0.1.0", docs_url="/docs", redoc_url="/redoc")
+
+@app.get("/")
+async def root():
+    return {
+        "message": "Welcome to the E-Commerce Analytics API",
+        "status": "operational",
+        "docs": "/docs",
+        "endpoints": [
+            {"path": "/filters", "method": "GET", "description": "Get available filter options"},
+            {"path": "/kpis", "method": "GET", "description": "Get key performance indicators"},
+            {"path": "/timeseries", "method": "GET", "description": "Get time series data"},
+            {"path": "/health", "method": "GET", "description": "Check API health"}
+        ]
+    }
+
+# Add basic error handling middleware
+@app.middleware("http")
+async def add_error_handling(request, call_next):
+    try:
+        return await call_next(request)
+    except Exception as e:
+        import traceback
+        print(f"Error processing request: {str(e)}")
+        print(traceback.format_exc())
+        return JSONResponse(
+            status_code=500,
+            content={"detail": f"Internal server error: {str(e)}"}
+        )
 
 # CORS for local dev (adjust allowed origins for prod)
 app.add_middleware(
@@ -32,7 +61,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-DATA_PATH = os.getenv("DATA_PATH", "../data/processed/Amazon_Sales_Cleaned.csv")
+# Get the absolute path to the data file
+# Get the absolute path to the project root (one level up from the api directory)
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_PATH = os.path.join(BASE_DIR, 'data', 'processed', 'Amazon_Sales_Cleaned.csv')
+
+# Print the data path for debugging
+print(f"Looking for data file at: {DATA_PATH}")
+if not os.path.exists(DATA_PATH):
+    print(f"Error: Data file not found at {DATA_PATH}")
+    print(f"Current working directory: {os.getcwd()}")
+    print(f"Directory contents: {os.listdir(os.path.dirname(DATA_PATH))}")
 
 @lru_cache(maxsize=1)
 def load_data_cached() -> pd.DataFrame:
@@ -72,8 +111,23 @@ def apply_filters(df: pd.DataFrame,
 
 
 @app.get("/health")
-def health():
-    return {"status": "ok"}
+async def health():
+    try:
+        # Test data loading
+        df = load_data_cached()
+        return {
+            "status": "ok",
+            "data_loaded": True,
+            "data_shape": {"rows": len(df), "columns": len(df.columns)},
+            "timestamp": pd.Timestamp.now().isoformat()
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e),
+            "data_loaded": False,
+            "timestamp": pd.Timestamp.now().isoformat()
+        }
 
 
 @app.get("/filters")
